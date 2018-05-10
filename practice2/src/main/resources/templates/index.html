@@ -1,0 +1,47 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>SpringBootStudyingGroup</title>
+    <link th:href="@{bootstrap/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{bootstrap/css/bootstrap-theme.css}" rel="stylesheet" />
+</head>
+<body bgcolor="black">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">访问Model</h3>
+    </div>
+    <div class="panel-body">
+        <span th:text="${GTitle.name}"></span>
+    </div>
+</div>
+<div th:if="${not #lists.isEmpty(people)}">     <!--遍历直到列表为空-->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">列表</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item" th:each="person:${people}">
+                    <span th:text="${person.name}"></span>
+                    <span th:text="${person.age}"></span>>
+                   <!--<a class="button button-3d button-royal" href="http://www.bootcss.com/">加油！</a>-->
+                    <button class="btn" th:onclick="'getName(\''+${person.name}+'\');'">加油！</button>
+                    <span>加油次数: </span>
+                    <span th:text="${person.times}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script th:src="@{jquery-3.3.1.min.js}" type="text/javascript"></script>
+<script th:src="@{bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+<script th:inline="javascript">
+    var title = [[${GTitle}]];
+    console.log(title.name+"/"+title.age);
+    function getName(name) {
+        console.log(name);
+    }
+</script>
+</body>
+</html>
